@@ -1,6 +1,49 @@
 # Composition
 
-### Type of relationships between objects
+## Background: Functions vs Methods -  Pointer vs Value Receivers
+- Go has both functions and methods. In Go, a method is a function that is declared with a receiver. 
+A receiver is a value or a pointer of a named or struct type.
+All the methods for a given type belong to the type’s method set.
+- You can treat the receiver as if it was an argument being passed to the method. 
+All the same reasons why you might want to pass by value or pass by reference apply.
+
+```
+package main
+
+import "fmt"
+
+type User struct {
+	name string
+}
+
+func (u User) SayName() {
+	fmt.Println(u.name)
+}
+
+func (u User) ChangeName() {
+	u.name = "Tom"
+}
+
+func main() {
+	user := User {
+		name: "Bob",
+	}
+
+	user.SayName()
+	user.ChangeName()
+	user.SayName()
+}
+```
+
+Reasons why you would want to pass by reference as opposed to by value:
+- You want to actually modify the receiver (“read/write” as opposed to just “read”)
+- The struct is very large and a deep copy is expensive
+- Consistency: if some of the methods on the struct have pointer receivers, the rest should too. This allows predictability of behavior
+
+The rule about pointers vs. values for receivers is that value methods can be invoked on pointers and values, 
+but pointer methods can only be invoked on pointers.
+
+## Type of relationships between objects
 - Single Inheritance
 - Multiple Inheritance
 - Composition
@@ -48,9 +91,9 @@ Animal
       .bark()
     Cat
      .meow()
-     RobotDog
-       .poop() - not implemented
-       .bark()    
+    RobotDog
+      .poop() - not implemented
+      .bark()    
 ```
 
 
@@ -73,56 +116,12 @@ and you are most likely going to make design mistakes doing that, because humans
 predict the future (even though it feels like we can), and getting out of these
 inheritance taxonomies hard.
 
-### Pointer vs Value Receivers
-- Go has both functions and methods. In Go, a method is a function that is declared with a receiver. 
-A receiver is a value or a pointer of a named or struct type.
-All the methods for a given type belong to the type’s method set.
-- You can treat the receiver as if it was an argument being passed to the method. 
-All the same reasons why you might want to pass by value or pass by reference apply.
-
-```
-package main
-
-import "fmt"
-
-type User struct {
-	name string
-}
-
-func (u User) SayName() {
-	fmt.Println(u.name)
-}
-
-func (u User) ChangeName() {
-	u.name = "Tom"
-}
-
-func main() {
-	user := User {
-		name: "Bob",
-	}
-
-	user.SayName()
-	user.ChangeName()
-	user.SayName()
-}
-```
-
-Reasons why you would want to pass by reference as opposed to by value:
-- You want to actually modify the receiver (“read/write” as opposed to just “read”)
-- The struct is very large and a deep copy is expensive
-- Consistency: if some of the methods on the struct have pointer receivers, the rest should too. This allows predictability of behavior
-
-The rule about pointers vs. values for receivers is that value methods can be invoked on pointers and values, 
-but pointer methods can only be invoked on pointers.
-
-
-## Composition in GO
+## Composition/Embedding in Go
 
 - While Go does'nt have an "object" type, Go "struct" types contain fields and methods.  
 - Go does not provide the typical, type-driven notion of subclassing, but it does have the ability to “borrow” 
 pieces of an implementation by embedding types within a struct or interface.
-Instead of inheritance Go strictly follows the composition over inheritance principle.
+- Instead of inheritance, Go strictly follows the composition over inheritance principle.
 
 **Has-a relationship:**
 
@@ -198,7 +197,6 @@ type Worker struct {
 	Person
 	Profession string
 }
-
 
 func main() {
 	worker := NewWorker()
