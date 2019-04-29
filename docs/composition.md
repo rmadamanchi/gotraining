@@ -93,7 +93,7 @@ Animal
      .meow()
     RobotDog
       .poop() - not implemented
-      .bark()    
+      .bark()
 ```
 
 

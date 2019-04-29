@@ -3,9 +3,6 @@
 ## Topics
 - Exporting
 - Package level Variables are Global variables
-- Dependency Injection
-- Circular dependencies
-
 
 ### Dependency Injection
 
