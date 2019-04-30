@@ -221,7 +221,7 @@ func NewWorker() *Worker {
 
 ```
 func (worker *Worker) Speak() {
-	fmt.Println("my name is", worker.Name, "and i'm a" + worker.Profession)
+	fmt.Println("my name is", worker.Name, "and i'm a",  worker.Profession)
 	fmt.Println("my address is",  worker.Address.Street, worker.Address.City, worker.Address.State)
 }
 ```
@@ -254,6 +254,19 @@ type Student struct {
 func (student *Student) Speak() {
 	fmt.Println("my name is", student.Name, "and i'm in grade", student.Grade)
 	fmt.Println("my address is",  student.Address.Street, student.Address.City, student.Address.State)
+}
+
+func NewStudent() *Student {
+	student := &Student{}
+	student.Name = "Steve"
+	student.Address = Address{
+		Street: "123 Main St",
+		City:   "Austin",
+		State:  "TX",
+	}
+	student.Grade = "11"
+
+	return student
 }
 
 func main() {
