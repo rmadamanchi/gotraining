@@ -270,9 +270,9 @@ func NewStudent() *Student {
 }
 
 func main() {
-	pepole := []Person{
-		Worker{},
-		Student{},
+	people := []*Person{
+		NewStudent(),
+		NewWorker(),
 	}
 }
 
