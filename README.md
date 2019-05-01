@@ -3,3 +3,5 @@
 - [Composition](docs/composition.md)
 - [Errors](docs/errors.md)
 - [Packages](docs/packages.md)
+
+- [Lab](docs/labs.md)
