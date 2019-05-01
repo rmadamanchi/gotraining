@@ -20,6 +20,8 @@ Please help me fix the code. I heard I need to use interfaces for these kinds of
 ## Errors
 
 Link to [Code](../cmd/lab2/lab2.go) and [Test](../cmd/lab2/lab2_test.go)
+
+
 The `DepositCheck` function is currently returning errors with string descriptions of what the issue is.
 - Validation errors when check number is empty or amount is <=0
 - Send to specialist review for suspicious activity if amount > 100000
